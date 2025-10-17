@@ -1,0 +1,31 @@
+[project]
+name = "pathwayannotator"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.3.0",
+    "ruff>=0.14.1",
+]
+
+[tool.ruff]
+# Set the maximum line length
+line-length = 88
+
+target-version = "py310"
+
+[tool.ruff.lint]
+# Enable a curated set of rules recommended by the ruff team
+# "E" and "F" are pycodestyle and Pyflakes rules respectively
+select = ["E", "F", "I", "UP", "PERF", "SIM"]
+
+# Never enforce certain rules, e.g. for line-length violations
+ignore = []
+
+[tool.ruff.format]
+# Use black-compatible formatting
+quote-style = "double"
