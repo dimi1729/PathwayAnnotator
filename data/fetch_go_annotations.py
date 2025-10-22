@@ -270,7 +270,7 @@ class GoAnnotationCollection:
         # Convert to serializable format
         serializable_data = {}
         for uniprot_id, go_ann in self.annotations.items():
-        serializable_data[uniprot_id] = go_ann.to_dict()
+            serializable_data[uniprot_id] = go_ann.to_dict()
 
         with open(filepath, 'w') as f:
             json.dump(serializable_data, f, indent=2)
@@ -326,11 +326,7 @@ class GoAnnotationCollection:
 
     def __repr__(self) -> str:
         """String representation of the collection."""
-        summary = self.summary()
-        return (f"GoAnnotationCollection({summary['total_proteins']} proteins, "
-                f"{summary['proteins_with_annotations']} with annotations, "
-                f"{summary['total_annotations']} total annotations)")
-
+        return f"GoAnnotationCollection({self.annotations})"
 
 def _chunked(iterable, size):
     for i in range(0, len(iterable), size):
@@ -461,8 +457,15 @@ if __name__ == '__main__':
     uniprots_file = "/home/abhinav22/Gohillab_AF/yeast_alphafold_results/yeast_mitocarta_plus_uniprot.csv"
     df = pl.read_csv(uniprots_file)
     uniprot_ids: list[str] = df["uniprot_id"].to_list()
-    file_collection = fetch_go_annotations_for_uniprot_ids(uniprot_ids[0:5])
+    file_collection = fetch_go_annotations_for_uniprot_ids(uniprot_ids)
 
     print(f"Saving {file_collection}")
 
-    file_collection.save_pickle("data/yeast_go_annotations_sample.pkl")
+    file_collection.save_pickle("data/yeast_all_go_annotations.pkl")
+    time.sleep(2)
+
+    annotations = GoAnnotationCollection.load_pickle("data/yeast_all_go_annotations.pkl")
+    gos = annotations.get_all_go_ids()
+    print(gos)
+    with open("data/yeast_all_go_annotations.json", 'w') as f:
+        json.dump(list(gos), f, indent=4)
