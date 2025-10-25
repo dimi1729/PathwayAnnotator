@@ -131,7 +131,8 @@ class PathwayTree:
             if node != self.root:  # Don't display the ROOT node
                 indent = '\t' * depth
                 gene_count = f" ({len(node.genes)} genes)" if node.genes else ""
-                print(f"{indent}{node.name}{gene_count}")
+                # print(f"{indent}{node.name}{gene_count}")
+                print(f"{indent}{node.name}")
 
             # Only recurse if we haven't hit max_depth
             if max_depth is None or depth < max_depth:

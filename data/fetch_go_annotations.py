@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Optional, Union, Dict, Any
 
 UNIPROT_SEARCH_URL = "https://rest.uniprot.org/uniprotkb/search"  # Website API search endpoint
+GO_URL = "https://www.ebi.ac.uk/QuickGO/services/ontology/go/terms"
 
 class GoAnnotation:
     """
@@ -326,7 +327,7 @@ class GoAnnotationCollection:
 
     def __repr__(self) -> str:
         """String representation of the collection."""
-        return f"GoAnnotationCollection({self.annotations})"
+        return f"GoAnnotationCollection({len(self.annotations)} proteins)"
 
 def _chunked(iterable, size):
     for i in range(0, len(iterable), size):
@@ -452,20 +453,110 @@ def fetch_go_annotations_for_uniprot_ids_legacy(
 
     return legacy_result
 
+def fetch_go_description(go_ids: list[str]) -> dict[str, str]:
+    """
+    Fetch GO term descriptions from the QuickGO API.
+
+    Args:
+        go_ids: List of GO IDs (e.g., ['GO:0008150', 'GO:0003674'])
+
+    Returns:
+        Dictionary mapping GO ID to its description/name
+    """
+    if not go_ids:
+        return {}
+
+    # Remove duplicates and clean GO IDs
+    unique_go_ids = list(set(go_ids))
+    cleaned_go_ids = []
+
+    for go_id in unique_go_ids:
+        # Ensure proper GO ID format
+        if go_id.startswith('GO:'):
+            cleaned_go_ids.append(go_id)
+        elif go_id.isdigit():
+            cleaned_go_ids.append(f'GO:{go_id.zfill(7)}')
+        else:
+            print(f"Warning: Invalid GO ID format: {go_id}")
+
+    if not cleaned_go_ids:
+        return {}
+
+    result = {}
+
+    # Process in chunks to avoid URL length limits
+    chunk_size = 50
+    for i in range(0, len(cleaned_go_ids), chunk_size):
+        chunk = cleaned_go_ids[i:i + chunk_size]
+
+        try:
+            # Build the URL with GO IDs as part of the path
+            go_ids_param = ','.join(chunk)
+            url = f"{GO_URL}/{go_ids_param}"
+
+            headers = {
+                'Accept': 'application/json',
+                'User-Agent': 'PathwayAnnotator/1.0'
+            }
+
+            response = requests.get(url, headers=headers, timeout=30)
+            response.raise_for_status()
+
+            data = response.json()
+
+            # Extract results
+            if 'results' in data:
+                for term in data['results']:
+                    go_id = term.get('id', '')
+                    name = term.get('name', 'Unknown')
+                    if go_id and go_id in chunk:  # Only include requested terms
+                        result[go_id] = name
+
+            # Rate limiting - be nice to the API
+            time.sleep(0.1)
+
+        except requests.RequestException as e:
+            print(f"Error fetching GO descriptions for chunk {i//chunk_size + 1}: {e}")
+            # Add placeholder entries for failed requests
+            for go_id in chunk:
+                if go_id not in result:
+                    result[go_id] = f"Error fetching description for {go_id}"
+
+        except Exception as e:
+            print(f"Unexpected error processing chunk {i//chunk_size + 1}: {e}")
+            for go_id in chunk:
+                if go_id not in result:
+                    result[go_id] = f"Unknown error for {go_id}"
+
+    # Ensure all requested GO IDs have entries
+    for go_id in cleaned_go_ids:
+        if go_id not in result:
+            result[go_id] = f"No description found for {go_id}"
+
+    return result
+
 if __name__ == '__main__':
 
-    uniprots_file = "/home/abhinav22/Gohillab_AF/yeast_alphafold_results/yeast_mitocarta_plus_uniprot.csv"
-    df = pl.read_csv(uniprots_file)
-    uniprot_ids: list[str] = df["uniprot_id"].to_list()
-    file_collection = fetch_go_annotations_for_uniprot_ids(uniprot_ids)
+    # uniprots_file = "/home/abhinav22/Gohillab_AF/yeast_alphafold_results/yeast_mitocarta_plus_uniprot.csv"
+    # df = pl.read_csv(uniprots_file)
+    # uniprot_ids: list[str] = df["uniprot_id"].to_list()
+    # file_collection = fetch_go_annotations_for_uniprot_ids(uniprot_ids)
 
-    print(f"Saving {file_collection}")
+    # print(f"Saving {file_collection}")
 
-    file_collection.save_pickle("data/yeast_all_go_annotations.pkl")
-    time.sleep(2)
+    # file_collection.save_pickle("data/yeast_all_go_annotations.pkl")
+    # time.sleep(2)
 
-    annotations = GoAnnotationCollection.load_pickle("data/yeast_all_go_annotations.pkl")
-    gos = annotations.get_all_go_ids()
-    print(gos)
-    with open("data/yeast_all_go_annotations.json", 'w') as f:
-        json.dump(list(gos), f, indent=4)
+    # annotations = GoAnnotationCollection.load_pickle("data/yeast_all_go_annotations.pkl")
+    # gos = annotations.get_all_go_ids()
+    # print(gos)
+    # with open("data/yeast_all_go_annotations.json", 'w') as f:
+    #     json.dump(list(gos), f, indent=4)
+
+    # go_ids = ['GO:0008150', 'GO:0003674', 'GO:0005575']
+    with open("data/yeast_all_go_annotations.json", 'r') as f:
+        go_ids = json.load(f)
+    descriptions = fetch_go_description(go_ids)
+    print(descriptions)
+    with open("data/yeast_all_go_descriptions.json", 'w') as f:
+        json.dump(descriptions, f, indent=4)

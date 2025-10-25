@@ -1,0 +1,149 @@
+Mitochondrial central dogma
+	mtDNA maintenance
+		mtDNA replication
+		mtDNA nucleoid
+		mtDNA repair
+		mtDNA modifications
+		mtDNA stability and decay
+	mtRNA metabolism
+		Transcription
+		mtRNA granules
+		Polycistronic mtRNA processing
+		mt-tRNA modifications
+		mt-rRNA modifications
+		mt-mRNA modifications
+		mtRNA stability and decay
+	Translation
+		Mitochondrial ribosome
+		Mitochondrial ribosome assembly
+		Translation factors
+		mt-tRNA synthetases
+		fMet processing
+Protein import, sorting and homeostasis
+	Protein import and sorting
+		TOM
+		SAM
+		MIA40
+		TIM22 carrier pathway
+		TIM23 presequence pathway
+		Import motor
+		OXA
+		Preprotein cleavage
+	Protein homeostasis
+		Proteases
+		Chaperones
+OXPHOS
+	OXPHOS subunits
+	OXPHOS assembly factors
+	Complex I
+		CI subunits
+		CI assembly factors
+	Complex II
+		CII subunits
+		CII assembly factors
+	Complex III
+		CIII subunits
+		CIII assembly factors
+	Complex IV
+		CIV subunits
+		CIV assembly factors
+	Complex V
+		CV subunits
+		CV assembly factors
+	Respirasome assembly
+	Cytochrome C
+Metabolism
+	Carbohydrate metabolism
+		Gluconeogenesis
+		Malate-aspartate shuttle
+		Glycerol phosphate shuttle
+		Pyruvate metabolism
+		TCA cycle
+		TCA-associated
+		Itaconate metabolism
+		Ketone metabolism
+		Propanoate metabolism
+	Lipid metabolism
+		Fatty acid oxidation
+		Type II fatty acid synthesis
+		Lipoate insertion
+		Cardiolipin synthesis
+		Cholesterol, bile acid, steroid synthesis
+		Cholesterol-associated
+		Phospholipid metabolism
+		Eicosanoid metabolism
+	Amino acid metabolism
+		Branched-chain amino acid metabolism
+		Branched-chain amino acid dehydrogenase complex
+		Lysine metabolism
+		Serine metabolism
+		Glycine metabolism
+		Glycine cleavage system
+		Glutamate metabolism
+		Proline metabolism
+		Glyoxylate metabolism
+		GABA metabolism
+		Catechol metabolism
+		Kynurenine metabolism
+		Urea cycle
+	Nucleotide metabolism
+		Nucleotide import
+		Nucleotide synthesis and processing
+		Creatine metabolism
+	Metals and cofactors
+		Carnitine synthesis and transport
+		Carnitine shuttle
+		Coenzyme A metabolism
+		Coenzyme Q metabolism
+		Copper metabolism
+		Iron homeostasis
+		Heme synthesis and processing
+		Fe-S cluster biosynthesis
+		Molybdenum cofactor synthesis and proteins
+		NAD biosynthesis and metabolism
+		Tetrahydrobiopterin synthesis
+		Fe-S-containing proteins
+		Heme-containing proteins
+	Vitamin metabolism
+		Choline and betaine metabolism
+		Biotin utilizing proteins
+		Vitamin A metabolism
+		Vitamin B1 metabolism
+		Vitamin B2 metabolism
+		Vitamin B6 metabolism
+		Vitamin B12 metabolism
+		Vitamin C metabolism
+		Vitamin D metabolism
+		Folate and 1-C metabolism
+	Detoxification
+		Xenobiotic metabolism
+		ROS and glutathione metabolism
+		Amidoxime reducing complex
+		Selenoproteins
+	Electron carriers
+		Cytochromes
+		Q-linked reactions, other
+	Sulfur metabolism
+Small molecule transport
+	SLC25A family
+	ABC transporters
+	Sideroflexins
+	Calcium uniporter
+Signaling
+	Calcium homeostasis
+		Calcium cycle
+		Mitochondrial permeability transition pore
+		EF hand proteins
+	Immune response
+	cAMP-PKA signaling
+Mitochondrial dynamics and surveillance
+	Fusion
+	Fission
+	Organelle contact sites
+	Intramitochondrial membrane interactions
+	Trafficking
+	Mitophagy
+	Autophagy
+	Apoptosis
+	Cristae formation
+		MICOS complex
