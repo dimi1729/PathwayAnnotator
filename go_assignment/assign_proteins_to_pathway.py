@@ -32,6 +32,9 @@ Input Files:
     - Pathway assignments CSV/JSON: Maps GO IDs to pathway hierarchies
       CSV format requires columns: GO_id, GO_description, Pathway, Description
       JSON format: {"pathway_hierarchy": ["GO:ID (description)", ...]}
+    - UniProt mapping CSV: Maps UniProt IDs to gene names
+      Required columns: UniprotID, Gene
+    - Pathway tree TXT: Hierarchical pathway structure for sorting
 
 Output Format:
     CSV file similar to human_mitocarta_pathways.csv with columns:
@@ -48,6 +51,11 @@ Evidence Filters:
     - 'reliable': Physical + traceable evidence (adds TAS, NAS, ComplexPortal)
     - 'all': All evidence codes including computational predictions
 
+Hierarchical Propagation:
+    Proteins are automatically propagated to all parent pathway levels. If a protein
+    appears in "OXPHOS > Complex II > CII subunits", it will also appear in
+    "OXPHOS > Complex II" and "OXPHOS".
+
 Pathway Depth Filtering:
     By default, proteins assigned to both broad (depth 1) and specific (depth >=2)
     pathways will only be retained in the more specific pathways. This reduces noise
@@ -63,13 +71,13 @@ from collections import defaultdict
 from typing import Dict, List, Set, Tuple
 import argparse
 
-# Add the data directory to the path to import GO annotation classes
-sys.path.append(str(Path(__file__).parent / 'data'))
+# Add the current directory to the path to import GO annotation classes
+sys.path.append(str(Path(__file__).parent))
 
 try:
     from fetch_go_annotations import GoAnnotation, GoAnnotationCollection
 except ImportError:
-    print("Error: Could not import GoAnnotation classes. Make sure fetch_go_annotations.py is in the data directory.")
+    print("Error: Could not import GoAnnotation classes. Make sure fetch_go_annotations.py is in the current directory.")
     sys.exit(1)
 
 
@@ -316,14 +324,15 @@ def assign_proteins_to_pathways(go_annotations: Dict[str, GoAnnotation],
 def filter_pathway_assignments_by_depth(pathway_assignments: Dict[str, List[Dict]]) -> Dict[str, List[Dict]]:
     """
     Filter pathway assignments to prioritize specific pathways over broad categories.
-    If a protein is only at depth 1 in some pathways but has depth >=2 in others,
-    only keep the deeper pathways.
+    Only removes broad pathways if the protein has more specific pathways within
+    the same hierarchy branch.
 
     For example, if a protein is assigned to both:
     - "Metabolism" (depth 1)
     - "Metabolism > Carbohydrate metabolism > Glycolysis" (depth 3)
 
-    Only the specific "Glycolysis" assignment will be kept.
+    Only the "Metabolism" assignment will be removed, but the protein should still
+    appear in "Metabolism > Carbohydrate metabolism" if it's also assigned there.
 
     Args:
         pathway_assignments: Dictionary mapping pathways to protein assignment lists
@@ -331,15 +340,17 @@ def filter_pathway_assignments_by_depth(pathway_assignments: Dict[str, List[Dict
     Returns:
         Filtered dictionary with depth-based filtering applied
     """
-    # Build protein-to-pathways mapping with depths
+    # Build protein-to-pathways mapping with depths and hierarchy info
     protein_pathways = defaultdict(list)
 
     for pathway, assignments in pathway_assignments.items():
-        pathway_depth = len(pathway.split(' > '))
+        pathway_parts = pathway.split(' > ')
+        pathway_depth = len(pathway_parts)
         for assignment in assignments:
             protein_id = assignment['protein_id']
             protein_pathways[protein_id].append({
                 'pathway': pathway,
+                'pathway_parts': pathway_parts,
                 'depth': pathway_depth,
                 'assignment': assignment
             })
@@ -349,18 +360,35 @@ def filter_pathway_assignments_by_depth(pathway_assignments: Dict[str, List[Dict
     proteins_filtered = 0
 
     for protein_id, pathways_info in protein_pathways.items():
-        # Get max depth for this protein
-        max_depth = max(info['depth'] for info in pathways_info)
+        kept_pathways = []
+        protein_had_filtering = False
 
-        # If max depth >= 2, filter out depth 1 pathways
-        if max_depth >= 2:
-            # Keep only pathways with depth >= 2
-            kept_pathways = [info for info in pathways_info if info['depth'] >= 2]
-            if len(kept_pathways) < len(pathways_info):
-                proteins_filtered += 1
-        else:
-            # Keep all pathways (all are depth 1)
-            kept_pathways = pathways_info
+        # Group pathways by hierarchy root
+        hierarchy_groups = defaultdict(list)
+        for info in pathways_info:
+            root = info['pathway_parts'][0]  # First part of hierarchy
+            hierarchy_groups[root].append(info)
+
+        # Process each hierarchy group separately
+        for root, group_pathways in hierarchy_groups.items():
+            max_depth_in_group = max(info['depth'] for info in group_pathways)
+
+            if max_depth_in_group >= 2:
+                # Only remove depth 1 pathways within this hierarchy if deeper ones exist
+                group_kept = []
+                for info in group_pathways:
+                    if info['depth'] == 1 and max_depth_in_group > 1:
+                        # Skip this broad pathway since we have more specific ones in same hierarchy
+                        protein_had_filtering = True
+                        continue
+                    group_kept.append(info)
+                kept_pathways.extend(group_kept)
+            else:
+                # Keep all pathways in this hierarchy (all depth 1)
+                kept_pathways.extend(group_pathways)
+
+        if protein_had_filtering:
+            proteins_filtered += 1
 
         # Add filtered assignments back
         for info in kept_pathways:
@@ -373,6 +401,126 @@ def filter_pathway_assignments_by_depth(pathway_assignments: Dict[str, List[Dict
                           in filtered_assignments.items() if assignments}
 
     return dict(filtered_assignments)
+
+
+def ensure_complete_hierarchical_coverage(pathway_assignments: Dict[str, List[Dict]],
+                                        pathway_tree_order: Dict[str, int]) -> Dict[str, List[Dict]]:
+    """
+    Ensure ALL pathway levels exist and have appropriate proteins, even if they don't
+    have direct GO term assignments. This fills in missing intermediate levels.
+
+    Args:
+        pathway_assignments: Dictionary mapping pathways to protein assignment lists
+        pathway_tree_order: Dictionary mapping pathway names to their tree order
+
+    Returns:
+        Dictionary with complete hierarchical coverage
+    """
+    complete_assignments = defaultdict(list)
+
+    # First, copy all existing assignments
+    for pathway, assignments in pathway_assignments.items():
+        complete_assignments[pathway].extend(assignments)
+
+    # Collect all unique proteins and their assignments by hierarchy level
+    hierarchy_proteins = defaultdict(set)
+
+    # For each existing pathway, collect proteins at each hierarchy level
+    for pathway, assignments in pathway_assignments.items():
+        pathway_parts = pathway.split(' > ')
+
+        for assignment in assignments:
+            protein_id = assignment['protein_id']
+
+            # Add this protein to all parent levels
+            for i in range(1, len(pathway_parts) + 1):
+                parent_pathway = ' > '.join(pathway_parts[:i])
+                hierarchy_proteins[parent_pathway].add(protein_id)
+
+    # Now ensure every pathway level that should exist has its proteins
+    missing_levels_filled = 0
+
+    for pathway, protein_ids in hierarchy_proteins.items():
+        if pathway not in complete_assignments or len(complete_assignments[pathway]) == 0:
+            # This pathway level is missing - create assignments for all its proteins
+            for protein_id in protein_ids:
+                # Find an existing assignment for this protein to use as template
+                template_assignment = None
+                for existing_pathway, existing_assignments in pathway_assignments.items():
+                    for assignment in existing_assignments:
+                        if assignment['protein_id'] == protein_id:
+                            template_assignment = assignment.copy()
+                            break
+                    if template_assignment:
+                        break
+
+                if template_assignment:
+                    complete_assignments[pathway].append(template_assignment)
+
+            missing_levels_filled += 1
+
+    if missing_levels_filled > 0:
+        print(f"Complete hierarchical coverage: filled {missing_levels_filled} missing pathway levels")
+
+    return dict(complete_assignments)
+
+
+def propagate_to_parent_pathways(pathway_assignments: Dict[str, List[Dict]]) -> Dict[str, List[Dict]]:
+    """
+    Propagate protein assignments to ALL parent pathway levels.
+    Every protein that appears in a specific pathway will also appear in all
+    parent levels of that pathway.
+
+    Args:
+        pathway_assignments: Dictionary mapping pathways to protein assignment lists
+
+    Returns:
+        Dictionary with proteins propagated to all parent pathway levels
+    """
+    propagated_assignments = defaultdict(list)
+
+    # Track all unique proteins and their assignments by pathway
+    protein_assignments_by_pathway = defaultdict(dict)
+
+    # First, collect all proteins and their assignments for each pathway
+    for pathway, assignments in pathway_assignments.items():
+        for assignment in assignments:
+            protein_id = assignment['protein_id']
+            protein_assignments_by_pathway[pathway][protein_id] = assignment
+
+    # Now propagate every protein to all parent levels
+    total_propagations = 0
+    proteins_affected = set()
+
+    for pathway, protein_assignments in protein_assignments_by_pathway.items():
+        pathway_parts = pathway.split(' > ')
+
+        # For each protein in this pathway
+        for protein_id, assignment in protein_assignments.items():
+
+            # Add to the original pathway
+            propagated_assignments[pathway].append(assignment)
+
+            # Add to all parent pathways
+            for i in range(len(pathway_parts)):
+                parent_pathway = ' > '.join(pathway_parts[:i+1])
+
+                # Check if protein already exists in this parent pathway
+                existing_proteins = {a['protein_id'] for a in propagated_assignments[parent_pathway]}
+
+                if protein_id not in existing_proteins:
+                    # Create assignment for parent pathway
+                    parent_assignment = assignment.copy()
+                    propagated_assignments[parent_pathway].append(parent_assignment)
+
+                    if parent_pathway != pathway:  # Don't count original assignment
+                        total_propagations += 1
+                        proteins_affected.add(protein_id)
+
+    if total_propagations > 0:
+        print(f"Hierarchical propagation: {len(proteins_affected)} proteins propagated to {total_propagations} parent pathways")
+
+    return dict(propagated_assignments)
 
 
 def create_pathway_output(pathway_assignments: Dict[str, List[Dict]],
@@ -467,13 +615,13 @@ def main():
     """Main function to run the pathway assignment."""
     parser = argparse.ArgumentParser(description='Assign yeast proteins to pathways based on GO annotations')
     parser.add_argument('--go_annotations',
-                       default='data/yeast_go_annotations_sample.pkl',
+                       default='go_assignment/data/yeast_go_annotations_sample.pkl',
                        help='Path to GO annotations pickle file')
     parser.add_argument('--pathway_assignments',
-                       default='data/go_pathway_assignments_test.csv',
+                       default='go_assignment/data/go_pathway_assignments_test.csv',
                        help='Path to GO-pathway assignments CSV or JSON file')
     parser.add_argument('--uniprot_mapping',
-                       default='data/yeast_mitocarta.csv',
+                       default='go_assignment/data/yeast_mitocarta.csv',
                        help='Path to UniProt ID to gene name mapping CSV file')
     parser.add_argument('--output',
                        default='yeast_pathway_assignments.csv',
@@ -491,8 +639,11 @@ def main():
     parser.add_argument('--no_depth_filter',
                        action='store_true',
                        help='Disable pathway depth filtering (keep all assignments)')
+    parser.add_argument('--no_propagation',
+                       action='store_true',
+                       help='Disable hierarchical propagation to parent pathways')
     parser.add_argument('--pathway_tree',
-                       default='data/pathway_tree.txt',
+                       default='go_assignment/data/pathway_tree.txt',
                        help='Path to pathway tree file for ordering output')
     parser.add_argument('--examples',
                        action='store_true',
@@ -519,6 +670,12 @@ def main():
     pathway_assignments = assign_proteins_to_pathways(
         go_annotations, pathway_df, args.evidence_filter
     )
+
+    # Apply hierarchical propagation unless disabled
+    if not args.no_propagation:
+        pathway_assignments = propagate_to_parent_pathways(pathway_assignments)
+        # Ensure complete hierarchical coverage
+        pathway_assignments = ensure_complete_hierarchical_coverage(pathway_assignments, pathway_tree_order)
 
     # Apply pathway depth filtering unless disabled
     if not args.no_depth_filter:
@@ -573,7 +730,7 @@ def print_usage_examples():
     print("       --evidence_filter reliable")
     print("   # OR with JSON format:")
     print("   python assign_proteins_to_pathway.py \\")
-    print("       --pathway_assignments hierarchy_to_go.json")
+    print("       --pathway_assignments data/hierarchy_to_go.json")
     print("\n3. Physical evidence only with debugging:")
     print("   python assign_proteins_to_pathway.py \\")
     print("       --evidence_filter physical --debug --stats")
@@ -587,6 +744,9 @@ def print_usage_examples():
     print("\n6. Custom pathway tree ordering:")
     print("   python assign_proteins_to_pathway.py \\")
     print("       --pathway_tree data/pathway_tree.txt")
+    print("\n7. Disable hierarchical propagation:")
+    print("   python assign_proteins_to_pathway.py \\")
+    print("       --no_propagation")
 
 
 def print_debug_info(go_annotations: Dict[str, GoAnnotation],

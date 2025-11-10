@@ -29,12 +29,8 @@
     "GO:0006085 (acetyl-CoA biosynthetic process)",
     "GO:0006086 (pyruvate decarboxylation to acetyl-CoA)",
     "GO:0006090 (pyruvate metabolic process)",
-    "GO:0006096 (glycolytic process)",
     "GO:0006850 (mitochondrial pyruvate transmembrane transport)",
-    "GO:0019654 (acetate fermentation)",
-    "GO:0019655 (glycolytic fermentation to ethanol)",
-    "GO:0045254 (pyruvate dehydrogenase complex)",
-    "GO:1903457 (lactate catabolic process)"
+    "GO:0045254 (pyruvate dehydrogenase complex)"
   ],
   "Mitochondrial dynamics and surveillance > Mitophagy": [
     "GO:0000422 (autophagy of mitochondrion)",
@@ -44,7 +40,6 @@
     "GO:1903147 (negative regulation of autophagy of mitochondrion)"
   ],
   "Protein import, sorting and homeostasis > Protein import and sorting > TOM": [
-    "GO:0005741 (mitochondrial outer membrane)",
     "GO:0005742 (mitochondrial outer membrane translocase complex)",
     "GO:0070096 (mitochondrial outer membrane translocase complex assembly)"
   ],
@@ -53,29 +48,20 @@
     "GO:0003743 (translation initiation factor activity)",
     "GO:0003746 (translation elongation factor activity)",
     "GO:0003747 (translation release factor activity)",
-    "GO:0003924 (GTPase activity)",
-    "GO:0005525 (GTP binding)",
     "GO:0008494 (translation activator activity)",
     "GO:0031369 (translation initiation factor binding)",
     "GO:0045182 (translation regulator activity)",
     "GO:0070126 (mitochondrial translational termination)"
   ],
   "Protein import, sorting and homeostasis > Protein import and sorting": [
-    "GO:0005758 (mitochondrial intermembrane space)",
     "GO:0006626 (protein targeting to mitochondrion)",
     "GO:0030943 (mitochondrion targeting sequence binding)",
-    "GO:0032473 (cytoplasmic side of mitochondrial outer membrane)",
     "GO:0045039 (protein insertion into mitochondrial inner membrane)",
-    "GO:0051646 (mitochondrion localization)",
-    "GO:0051654 (establishment of mitochondrion localization)",
-    "GO:0070585 (protein localization to mitochondrion)",
     "GO:0140595 (MIM complex)",
     "GO:1903955 (positive regulation of protein targeting to mitochondrion)",
     "GO:1990524 (INA complex)"
   ],
   "Metabolism > Detoxification > ROS and glutathione metabolism": [
-    "GO:0004032 (aldose reductase (NADPH) activity)",
-    "GO:0004130 (cytochrome-c peroxidase activity)",
     "GO:0004362 (glutathione-disulfide reductase (NADPH) activity)",
     "GO:0004364 (glutathione transferase activity)",
     "GO:0004416 (hydroxyacylglutathione hydrolase activity)",
@@ -90,21 +76,14 @@
     "GO:0008379 (thioredoxin peroxidase activity)",
     "GO:0016174 (NAD(P)H oxidase H2O2-forming activity)",
     "GO:0016532 (superoxide dismutase copper chaperone activity)",
-    "GO:0016972 (thiol oxidase activity)",
-    "GO:0019170 (methylglyoxal reductase (NADH) activity)",
-    "GO:0019243 (methylglyoxal catabolic process to D-lactate via S-lactoyl-glutathione)",
     "GO:0019430 (removal of superoxide radicals)",
-    "GO:0032440 (2-alkenal reductase [NAD(P)+] activity)",
     "GO:0033743 (peptide-methionine (R)-S-oxide reductase activity)",
-    "GO:0034599 (cellular response to oxidative stress)",
     "GO:0034614 (cellular response to reactive oxygen species)",
     "GO:0042743 (hydrogen peroxide metabolic process)",
-    "GO:0045454 (cell redox homeostasis)",
     "GO:0047066 (phospholipid-hydroperoxide glutathione peroxidase activity)",
     "GO:0051903 (S-(hydroxymethyl)glutathione dehydrogenase [NAD(P)+] activity)",
     "GO:0072593 (reactive oxygen species metabolic process)",
     "GO:0110050 (deaminated glutathione amidase activity)",
-    "GO:1902170 (cellular response to reactive nitrogen species)",
     "GO:1902693 (superoxide dismutase complex)"
   ],
   "Metabolism > Amino acid metabolism > Glycine metabolism": [
@@ -139,12 +118,9 @@
     "GO:0005528 (FK506 binding)",
     "GO:0006457 (protein folding)",
     "GO:0006458 ('de novo' protein folding)",
-    "GO:0009408 (response to heat)",
     "GO:0032460 (negative regulation of protein oligomerization)",
-    "GO:0034605 (cellular response to heat)",
     "GO:0035632 (mitochondrial prohibitin complex)",
     "GO:0042026 (protein refolding)",
-    "GO:0042719 (mitochondrial intermembrane space protein transporter complex)",
     "GO:0043254 (regulation of protein-containing complex assembly)",
     "GO:0044183 (protein folding chaperone)",
     "GO:0051082 (unfolded protein binding)",
@@ -152,10 +128,8 @@
     "GO:0051087 (protein-folding chaperone binding)",
     "GO:0051131 (chaperone-mediated protein complex assembly)",
     "GO:0051787 (misfolded protein binding)",
-    "GO:0070370 (cellular heat acclimation)",
     "GO:0097718 (disordered domain specific binding)",
     "GO:0101031 (protein folding chaperone complex)",
-    "GO:0120155 (MIH complex)",
     "GO:1903644 (regulation of chaperone-mediated protein folding)"
   ],
   "Protein import, sorting and homeostasis > Protein homeostasis > Proteases": [
@@ -174,12 +148,10 @@
     "GO:0008237 (metallopeptidase activity)",
     "GO:0008242 (omega peptidase activity)",
     "GO:0008418 (protein-N-terminal asparagine amidohydrolase activity)",
-    "GO:0010997 (anaphase-promoting complex binding)",
     "GO:0017171 (serine hydrolase activity)",
     "GO:0030163 (protein catabolic process)",
     "GO:0031146 (SCF-dependent proteasomal ubiquitin-dependent protein catabolic process)",
     "GO:0031942 (i-AAA complex)",
-    "GO:0032435 (negative regulation of proteasomal ubiquitin-dependent protein catabolic process)",
     "GO:0033619 (membrane protein proteolysis)",
     "GO:0035694 (mitochondrial protein catabolic process)",
     "GO:0036266 (Cdc48p-Npl4p-Vms1p AAA ATPase complex)",
@@ -198,8 +170,6 @@
     "GO:0120174 (stress-induced homeostatically regulated protein degradation pathway)"
   ],
   "Mitochondrial central dogma > Translation": [
-    "GO:0000049 (tRNA binding)",
-    "GO:0000056 (ribosomal small subunit export from nucleus)",
     "GO:0004045 (peptidyl-tRNA hydrolase activity)",
     "GO:0006413 (translational initiation)",
     "GO:0006414 (translational elongation)",
@@ -224,8 +194,7 @@
     "GO:0001405 (PAM complex, Tim23 associated import motor)"
   ],
   "Protein import, sorting and homeostasis > Protein import and sorting > TIM23 presequence pathway": [
-    "GO:0005744 (TIM23 mitochondrial import inner membrane translocase complex)",
-    "GO:0030150 (protein import into mitochondrial matrix)"
+    "GO:0005744 (TIM23 mitochondrial import inner membrane translocase complex)"
   ],
   "OXPHOS > Complex I": [
     "GO:0003954 (NADH dehydrogenase activity)",
@@ -236,27 +205,17 @@
   ],
   "Metabolism > Metals and cofactors > Fe-S cluster biosynthesis": [
     "GO:0016226 (iron-sulfur cluster assembly)",
-    "GO:0031071 (cysteine desulfurase activity)",
     "GO:0044571 ([2Fe-2S] cluster assembly)",
     "GO:0044572 ([4Fe-4S] cluster assembly)",
     "GO:0097361 (cytosolic [4Fe-4S] assembly targeting complex)",
     "GO:0099128 (mitochondrial [2Fe-2S] assembly complex)",
-    "GO:1990221 (L-cysteine desulfurase complex)",
     "GO:1990229 (iron-sulfur cluster assembly complex)"
   ],
   "Mitochondrial central dogma > Translation > Mitochondrial ribosome": [
-    "GO:0003735 (structural constituent of ribosome)",
-    "GO:0005198 (structural molecule activity)",
     "GO:0005527 (macrolide binding)",
     "GO:0005761 (mitochondrial ribosome)",
     "GO:0005762 (mitochondrial large ribosomal subunit)",
     "GO:0005763 (mitochondrial small ribosomal subunit)",
-    "GO:0005840 (ribosome)",
-    "GO:0019843 (rRNA binding)",
-    "GO:0033750 (ribosome localization)",
-    "GO:0043022 (ribosome binding)",
-    "GO:0043023 (ribosomal large subunit binding)",
-    "GO:0072344 (rescue of stalled ribosome)",
     "GO:0097177 (mitochondrial ribosome binding)",
     "GO:1990400 (mitochondrial ribosomal large subunit rRNA binding)"
   ],
@@ -265,9 +224,6 @@
     "GO:0000957 (mitochondrial RNA catabolic process)",
     "GO:0000958 (mitochondrial mRNA catabolic process)",
     "GO:0003730 (mRNA 3'-UTR binding)",
-    "GO:0004540 (RNA nuclease activity)",
-    "GO:0006401 (RNA catabolic process)",
-    "GO:0008081 (phosphoric diester hydrolase activity)",
     "GO:0008409 (5'-3' exonuclease activity)",
     "GO:0008859 (exoribonuclease II activity)",
     "GO:0035925 (mRNA 3'-UTR AU-rich region binding)",
@@ -276,40 +232,17 @@
     "GO:0048255 (mRNA stabilization)",
     "GO:0070651 (nonfunctional rRNA decay)",
     "GO:0070935 (3'-UTR-mediated mRNA stabilization)",
-    "GO:1990261 (pre-mRNA catabolic process)",
-    "GO:1990825 (sequence-specific mRNA binding)",
-    "GO:1990838 (poly(U)-specific exoribonuclease activity, producing 3' uridine cyclic phosphate ends)"
+    "GO:1990825 (sequence-specific mRNA binding)"
   ],
   "OXPHOS > Complex V": [
     "GO:0001671 (ATPase activator activity)",
-    "GO:0005524 (ATP binding)",
     "GO:0015986 (proton motive force-driven ATP synthesis)",
-    "GO:0042030 (ATPase inhibitor activity)",
     "GO:0042776 (proton motive force-driven mitochondrial ATP synthesis)",
-    "GO:0043531 (ADP binding)",
     "GO:0045259 (proton-transporting ATP synthase complex)",
-    "GO:0046034 (ATP metabolic process)",
     "GO:0046961 (proton-transporting ATPase activity, rotational mechanism)"
   ],
   "Mitochondrial central dogma > mtDNA maintenance > mtDNA replication": [
-    "GO:0000076 (DNA replication checkpoint signaling)",
-    "GO:0000403 (Y-form DNA binding)",
-    "GO:0003688 (DNA replication origin binding)",
-    "GO:0003887 (DNA-directed DNA polymerase activity)",
-    "GO:0005657 (replication fork)",
-    "GO:0006260 (DNA replication)",
     "GO:0006264 (mitochondrial DNA replication)",
-    "GO:0006269 (DNA replication, synthesis of primer)",
-    "GO:0006270 (DNA replication initiation)",
-    "GO:0006273 (lagging strand elongation)",
-    "GO:0006274 (DNA replication termination)",
-    "GO:0008408 (3'-5' exonuclease activity)",
-    "GO:0030894 (replisome)",
-    "GO:0031297 (replication fork processing)",
-    "GO:0036388 (pre-replicative complex assembly)",
-    "GO:0043137 (DNA replication, removal of RNA primer)",
-    "GO:0043138 (3'-5' DNA helicase activity)",
-    "GO:0061749 (forked DNA-dependent helicase activity)",
     "GO:0090297 (positive regulation of mitochondrial DNA replication)"
   ],
   "Mitochondrial central dogma > mtRNA metabolism > mt-tRNA modifications": [
@@ -398,20 +331,11 @@
     "GO:0051539 (4 iron, 4 sulfur cluster binding)"
   ],
   "Mitochondrial dynamics and surveillance > Cristae formation": [
-    "GO:0007006 (mitochondrial membrane organization)",
-    "GO:0007007 (inner mitochondrial membrane organization)",
-    "GO:0030061 (mitochondrial crista)",
-    "GO:0031966 (mitochondrial membrane)",
     "GO:0042407 (cristae formation)",
-    "GO:0060988 (lipid tube assembly)",
-    "GO:0097749 (membrane tubulation)",
-    "GO:0097753 (membrane bending)",
-    "GO:0180020 (membrane bending activity)",
     "GO:1903525 (regulation of membrane tubulation)",
     "GO:1905153 (regulation of membrane invagination)"
   ],
   "Mitochondrial central dogma > mtRNA metabolism > Transcription": [
-    "GO:0001046 (core promoter sequence-specific DNA binding)",
     "GO:0001073 (transcription antitermination factor activity, DNA binding)",
     "GO:0003700 (DNA-binding transcription factor activity)",
     "GO:0003899 (DNA-directed RNA polymerase activity)",
@@ -425,15 +349,12 @@
     "GO:0034245 (mitochondrial DNA-directed RNA polymerase complex)",
     "GO:0034246 (mitochondrial transcription factor activity)",
     "GO:0045893 (positive regulation of DNA-templated transcription)",
-    "GO:1903108 (regulation of mitochondrial transcription)",
-    "GO:1990841 (promoter-specific chromatin binding)"
+    "GO:1903108 (regulation of mitochondrial transcription)"
   ],
   "Mitochondrial central dogma > mtRNA metabolism": [
-    "GO:0000373 (Group II intron splicing)",
     "GO:0000460 (maturation of 5.8S rRNA)",
     "GO:0000963 (mitochondrial RNA processing)",
     "GO:0002151 (G-quadruplex RNA binding)",
-    "GO:0003723 (RNA binding)",
     "GO:0003724 (RNA helicase activity)",
     "GO:0004521 (RNA endonuclease activity)",
     "GO:0006396 (RNA processing)",
@@ -448,8 +369,6 @@
     "GO:2000234 (positive regulation of rRNA processing)"
   ],
   "Protein import, sorting and homeostasis > Protein import and sorting > MIA40": [
-    "GO:0015036 (disulfide oxidoreductase activity)",
-    "GO:0016971 (flavin-dependent sulfhydryl oxidase activity)",
     "GO:0045041 (protein import into mitochondrial intermembrane space)",
     "GO:0160203 (mitochondrial disulfide relay system)"
   ],
@@ -525,61 +444,11 @@
     "GO:0051990 ((R)-2-hydroxyglutarate dehydrogenase activity)"
   ],
   "Mitochondrial central dogma > mtDNA maintenance > mtDNA repair": [
-    "GO:0000018 (regulation of DNA recombination)",
-    "GO:0000150 (DNA strand exchange activity)",
-    "GO:0000703 (oxidized pyrimidine nucleobase lesion DNA N-glycosylase activity)",
-    "GO:0000725 (recombinational repair)",
-    "GO:0000727 (double-strand break repair via break-induced replication)",
-    "GO:0003904 (deoxyribodipyrimidine photo-lyase activity)",
-    "GO:0003906 (DNA-(apurinic or apyrimidinic site) endonuclease activity)",
-    "GO:0003910 (DNA ligase (ATP) activity)",
-    "GO:0004519 (endonuclease activity)",
-    "GO:0004520 (DNA endonuclease activity)",
-    "GO:0004844 (uracil DNA N-glycosylase activity)",
-    "GO:0006281 (DNA repair)",
-    "GO:0006284 (base-excision repair)",
-    "GO:0006285 (base-excision repair, AP site formation)",
-    "GO:0006289 (nucleotide-excision repair)",
-    "GO:0006298 (mismatch repair)",
-    "GO:0006302 (double-strand break repair)",
-    "GO:0006303 (double-strand break repair via nonhomologous end joining)",
-    "GO:0006310 (DNA recombination)",
-    "GO:0006974 (DNA damage response)",
-    "GO:0008296 (3'-5'-DNA exonuclease activity)",
-    "GO:0008311 (double-stranded DNA 3'-5' DNA exonuclease activity)",
-    "GO:0008534 (oxidized purine nucleobase lesion DNA N-glycosylase activity)",
-    "GO:0017005 (3'-tyrosyl-DNA phosphodiesterase activity)",
-    "GO:0019985 (translesion synthesis)",
-    "GO:0032137 (guanine/thymine mispair binding)",
-    "GO:0032139 (dinucleotide insertion or deletion binding)",
-    "GO:0035861 (site of double-strand break)",
-    "GO:0036297 (interstrand cross-link repair)",
-    "GO:0042276 (error-prone translesion synthesis)",
-    "GO:0043504 (mitochondrial DNA repair)",
-    "GO:0045145 (single-stranded DNA 5'-3' DNA exonuclease activity)",
-    "GO:0070987 (error-free translesion synthesis)",
-    "GO:0071932 (replication fork reversal)",
-    "GO:0072711 (cellular response to hydroxyurea)",
-    "GO:1905347 (endodeoxyribonuclease complex)",
-    "GO:1990166 (protein localization to site of double-strand break)"
+    "GO:0043504 (mitochondrial DNA repair)"
   ],
   "Mitochondrial central dogma > mtDNA maintenance": [
     "GO:0000002 (mitochondrial genome maintenance)",
-    "GO:0000722 (telomere maintenance via recombination)",
-    "GO:0003677 (DNA binding)",
-    "GO:0003678 (DNA helicase activity)",
-    "GO:0003690 (double-stranded DNA binding)",
-    "GO:0003697 (single-stranded DNA binding)",
-    "GO:0004529 (DNA exonuclease activity)",
-    "GO:0006276 (plasmid maintenance)",
-    "GO:0006315 (homing of group II introns)",
-    "GO:0008094 (ATP-dependent activity, acting on DNA)",
-    "GO:0017108 (5'-flap endonuclease activity)",
     "GO:0032042 (mitochondrial DNA metabolic process)",
-    "GO:0035753 (maintenance of DNA trinucleotide repeats)",
-    "GO:0036121 (double-stranded DNA helicase activity)",
-    "GO:0043047 (single-stranded telomeric DNA binding)",
-    "GO:0043565 (sequence-specific DNA binding)",
     "GO:1901858 (regulation of mitochondrial DNA metabolic process)"
   ],
   "Metabolism > Metals and cofactors > Iron homeostasis": [
@@ -623,7 +492,6 @@
   ],
   "Mitochondrial dynamics and surveillance > Fission": [
     "GO:0000266 (mitochondrial fission)",
-    "GO:0044396 (actin cortical patch organization)",
     "GO:0090141 (positive regulation of mitochondrial fission)",
     "GO:0090148 (membrane fission)",
     "GO:1904902 (ESCRT III complex assembly)",
@@ -636,7 +504,6 @@
     "GO:0008425 (2-methoxy-6-polyprenyl-1,4-benzoquinol methyltransferase activity)",
     "GO:0010420 (polyprenyldihydroxybenzoate methyltransferase activity)",
     "GO:0010795 (regulation of ubiquinone biosynthetic process)",
-    "GO:0018484 (4-hydroxybenzaldehyde dehydrogenase (NAD+) activity)",
     "GO:0061542 (3-demethylubiquinol 3-O-methyltransferase activity)",
     "GO:0106364 (4-hydroxy-3-all-trans-polyprenylbenzoate oxygenase activity)",
     "GO:1904775 (positive regulation of ubiquinone biosynthetic process)"
@@ -669,6 +536,7 @@
   ],
   "Mitochondrial central dogma > mtRNA metabolism > Polycistronic mtRNA processing": [
     "GO:0000213 (tRNA-intron endonuclease activity)",
+    "GO:0000373 (Group II intron splicing)",
     "GO:0000214 (tRNA-intron endonuclease complex)",
     "GO:0000372 (Group I intron splicing)",
     "GO:0000379 (tRNA-type intron splice site recognition and cleavage)",
@@ -689,10 +557,7 @@
     "GO:0042780 (tRNA 3'-end processing)",
     "GO:0042781 (3'-tRNA processing endoribonuclease activity)",
     "GO:0090615 (mitochondrial mRNA processing)",
-    "GO:0090730 (Las1 complex)",
-    "GO:0097745 (mitochondrial tRNA 5'-end processing)",
-    "GO:1990180 (mitochondrial tRNA 3'-end processing)",
-    "GO:2000235 (regulation of tRNA processing)"
+    "GO:0090730 (Las1 complex)"
   ],
   "Mitochondrial central dogma > mtDNA maintenance > mtDNA nucleoid": [
     "GO:0000262 (mitochondrial chromosome)",
@@ -734,8 +599,7 @@
     "GO:0051880 (G-quadruplex DNA binding)"
   ],
   "Protein import, sorting and homeostasis > Protein import and sorting > SAM": [
-    "GO:0001401 (SAM complex)",
-    "GO:0045040 (protein insertion into mitochondrial outer membrane)"
+    "GO:0001401 (SAM complex)"
   ],
   "OXPHOS > Complex V > CV subunits": ["GO:0051117 (ATPase binding)"],
   "Metabolism > Metals and cofactors > Heme synthesis and processing": [
@@ -829,23 +693,16 @@
     "GO:0005315 (phosphate transmembrane transporter activity)",
     "GO:0005342 (organic acid transmembrane transporter activity)",
     "GO:0005371 (tricarboxylate secondary active transmembrane transporter activity)",
-    "GO:0005471 (ATP:ADP antiporter activity)",
     "GO:0006843 (mitochondrial citrate transmembrane transport)",
-    "GO:0006865 (amino acid transport)",
     "GO:0015174 (basic amino acid transmembrane transporter activity)",
     "GO:0015183 (L-aspartate transmembrane transporter activity)",
     "GO:0015230 (FAD transmembrane transporter activity)",
-    "GO:0015297 (antiporter activity)",
     "GO:0015742 (alpha-ketoglutarate transport)",
-    "GO:0015744 (succinate transport)",
     "GO:0015805 (S-adenosyl-L-methionine transport)",
     "GO:0015813 (L-glutamate transmembrane transport)",
     "GO:0015827 (tryptophan transport)",
-    "GO:0015866 (ADP transport)",
-    "GO:0015867 (ATP transport)",
     "GO:0035352 (NAD transmembrane transport)",
     "GO:0035435 (phosphate ion transmembrane transport)",
-    "GO:1990545 (mitochondrial thiamine pyrophosphate transmembrane transport)",
     "GO:1990575 (mitochondrial L-ornithine transmembrane transport)"
   ],
   "OXPHOS > Complex II > CII assembly factors": [
@@ -855,7 +712,6 @@
     "GO:1904231 (positive regulation of succinate dehydrogenase activity)"
   ],
   "OXPHOS": [
-    "GO:0005743 (mitochondrial inner membrane)",
     "GO:0009060 (aerobic respiration)",
     "GO:0043457 (regulation of cellular respiration)"
   ],
@@ -890,18 +746,12 @@
     "GO:0004372 (glycine hydroxymethyltransferase activity)",
     "GO:0004477 (methenyltetrahydrofolate cyclohydrolase activity)",
     "GO:0004488 (methylenetetrahydrofolate dehydrogenase (NADP+) activity)",
-    "GO:0006730 (one-carbon metabolic process)",
-    "GO:0008757 (S-adenosylmethionine-dependent methyltransferase activity)",
     "GO:0008841 (dihydrofolate synthase activity)",
     "GO:0009396 (folic acid-containing compound biosynthetic process)",
     "GO:0030272 (5-formyltetrahydrofolate cyclo-ligase activity)",
-    "GO:0032259 (methylation)",
-    "GO:0043418 (homocysteine catabolic process)",
-    "GO:0046294 (formaldehyde catabolic process)",
     "GO:0046452 (dihydrofolate metabolic process)",
     "GO:0046654 (tetrahydrofolate biosynthetic process)",
-    "GO:0046656 (folic acid biosynthetic process)",
-    "GO:0047453 (ATP-dependent NAD(P)H-hydrate dehydratase activity)"
+    "GO:0046656 (folic acid biosynthetic process)"
   ],
   "OXPHOS > Complex III": ["GO:0045275 (respiratory chain complex III)"],
   "OXPHOS > Complex III > CIII subunits": [
@@ -1005,14 +855,13 @@
     "GO:0005847 (mRNA cleavage and polyadenylation specificity factor complex)",
     "GO:1990481 (mRNA pseudouridine synthesis)"
   ],
-  "Mitochondrial central dogma": ["GO:0016874 (ligase activity)"],
+  "Mitochondrial central dogma": [],
   "Mitochondrial dynamics and surveillance": [
     "GO:0000753 (cell morphogenesis involved in conjugation with cellular fusion)",
     "GO:0005740 (mitochondrial envelope)",
-    "GO:0005933 (cellular bud)",
     "GO:0007005 (mitochondrion organization)",
-    "GO:0030437 (ascospore formation)",
-    "GO:0033101 (cellular bud membrane)"
+    "GO:0051646 (mitochondrion localization)",
+    "GO:0051654 (establishment of mitochondrion localization)"
   ],
   "Metabolism > Electron carriers > Cytochromes": [
     "GO:0003958 (NADPH-hemoprotein reductase activity)",
@@ -1043,6 +892,7 @@
     "GO:0031405 (lipoic acid binding)"
   ],
   "Metabolism > Vitamin metabolism > Vitamin B1 metabolism": [
-    "GO:0090422 (thiamine pyrophosphate transmembrane transporter activity)"
+    "GO:0090422 (thiamine pyrophosphate transmembrane transporter activity)",
+    "GO:1990545 (mitochondrial thiamine pyrophosphate transmembrane transport)"
   ]
 }
